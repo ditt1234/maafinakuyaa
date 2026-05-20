@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Pacarku Tersayang</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .container {
+            background: white;
+            padding: 35px 30px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(255, 75, 110, 0.15);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+            border: 3px solid #ff85a1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .emoji-display {
+            font-size: 65px;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        h1 {
+            color: #ff477e;
+            font-size: 24px;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            color: #555555;
+            font-size: 15.5px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        button {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-step {
+            background-color: #fff0f3;
+            color: #ff477e;
+            border: 2px solid #ffb3c6;
+        }
+
+        .btn-step:hover {
+            background-color: #ffb3c6;
+            transform: translateY(-2px);
+        }
+
+        .letter-box {
+            display: none;
+            background: #fff0f3;
+            padding: 20px;
+            border-radius: 16px;
+            border: 2px dashed #ff477e;
+            text-align: left;
+            margin-top: 15px;
+            animation: openLetter 0.8s ease-in-out forwards;
+        }
+
+        @keyframes openLetter {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .letter-box h3 {
+            color: #ff477e;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .letter-text {
+            font-size: 14.5px;
+            color: #444;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .floating-heart {
+            position: absolute;
+            color: #ff477e;
+            font-size: 24px;
+            animation: floatUp 2.5s ease-out forwards;
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0 { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) rotate(360deg) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="emoji-display" id="mainEmoji">🥺</div>
+        <h1 id="mainTitle">Boleh Aku Minta Waktunya Sebentar?</h1>
+        
+        <p id="mainInstruction">
+            Aku tahu gara-gara aku salah repost video kemarin, kamu jadi sedih dan badmood... Aku beneran nggak tenang kepikiran kamu terus. Tolong klik tombol di bawah ini ya? 🥺
+        </p>
+
+        <div class="btn-group" id="actionArea">
+            <button class="btn-step" id="nextBtn" onclick="nextStep()">Aku Mau Denger Penjelasan Kamu</button>
+        </div>
+
+        <div class="letter-box" id="secretLetter">
+            <h3>Surat Maaf & Penyemangat Buat Kamu ✨</h3>
+            <div class="letter-text">
+                Hai sayang... Melalui tulisan kecil ini, aku mau minta maaf yang sebesar-besarnya dari lubuk hatiku yang paling dalam. Aku beneran nyesel dan merasa bersalah banget karena udah asal repost video kemarin. Aku sadar tindakan cerobohku itu udah bikin kamu sedih, kecewa, dan jadi badmood seharian. Maafin aku ya karena kurang peka sama perasaan kamu... <br><br>
+                Aku janji ke depannya bakal lebih hati-hati dan mikirin perasaan kamu sebelum nge-post atau repost apa pun di sosmed. Makasih ya kamu selalu sabar dan mau ngingetin aku. <br><br>
+                Owh iya, buat hari ini... semangat terus ya kerjanya! ✨ Jangan biarin badmood karena aku ngerusak fokus dan hari kamu yang berharga. Kamu itu hebat, kuat, dan aku selalu bangga sama semua kerja keras kamu. Kalau udah senggang, kabari aku yaa... Aku kangen banget pengen denger cerita kamu hari ini. I love you so much, pacar hebatku! ❤️
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const emoji = document.getElementById('mainEmoji');
+        const title = document.getElementById('mainTitle');
+        const instruction = document.getElementById('mainInstruction');
+        const nextBtn = document.getElementById('nextBtn');
+        const letter = document.getElementById('secretLetter');
+
+        function nextStep() {
+            if (currentStep === 1) {
+                emoji.innerText = '😔';
+                title.innerText = 'Aku Beneran Menyesal...';
+                instruction.innerText = 'Aku nggak bermaksud sama sekali buat bikin mood kamu hancur hari ini. Aku janji bakal berusaha buat lebih ngejaga perasaan kamu.';
+                nextBtn.innerText = 'Buka Pesan Terakhir Dari Aku';
+                currentStep = 2;
+            } else if (currentStep === 2) {
+                emoji.innerText = '💖';
+                title.innerText = 'Terima Kasih Ya Sayang';
+                instruction.style.display = 'none';
+                nextBtn.style.display = 'none';
+                letter.style.display = 'block';
+                
+                startHeartRain();
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('span');
+            heart.classList.add('floating-heart');
+            const heartTypes = ['❤️', '💖', '💝', '💕'];
+            heart.innerText = heartTypes[Math.floor(Math.random() * heartTypes.length)];
+            
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 1.5 + 1.5) + 's';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 2500);
+        }
+
+        function startHeartRain() {
+            setInterval(createHeart, 200);
+        }
+    </script>
+</body>
+</html>
